@@ -14,14 +14,24 @@ void control(char c)
     }
 }
 
-struct todo
+typedef struct
 {
   bool done;
-  char str[];
-};
+  char name[100];
+} todo;
+
+
+#define sizeTodo 2
 
 int main(void){
+  todo tds[sizeTodo];
 
+  //tds.done = false;
+  //tds.name = "test1";
+  tds[0].done = false;
+  strcpy(tds[0].name,"test1");
+  tds[1].done = false;
+  strcpy(tds[1].name,"test2");
   initscr();
   noecho();
 
@@ -37,10 +47,14 @@ int main(void){
       erase();
 
       // Render stuff
-      move(sizeY/2, (sizeX-strlen(msg))/2);
-      
-      printw(msg);    
+      //move(sizeY/2, (sizeX-strlen(msg))/
+      //printw(msg);    
 
+      for (int i = 0; i < sizeTodo;i++) {
+	move(i, 0);
+	printw(tds[i].name);
+      }
+      
       // Get the control char
       control(getch());
 
