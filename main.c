@@ -17,10 +17,10 @@ void control(char c)
 struct todo
 {
   bool done;
-  int id;
   char str[];
 };
 
+todo 
 int main(void){
 
   initscr();
