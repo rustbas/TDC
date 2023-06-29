@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <ncurses.h>
+#include <string.h>
 
-1bool quit = false;
+bool quit = false;
 
 void control(char c)
 {
@@ -13,15 +14,41 @@ void control(char c)
     }
 }
 
+struct todo
+{
+  bool done;
+  int id;
+  char str[];
+};
+
+
+
 int main(void){
 
   initscr();
   noecho();
-  printw("Hello, World!\n");
-  refresh();
+
+  int sizeY, sizeX;
+  char msg[] = "Hello, World";
+  
   while (!quit)
     {
+      // Get the size of the terminal
+      getmaxyx(stdscr, sizeY, sizeX);
+      
+      // Clean the screen
+      erase();
+
+      // Render stuff
+      move(sizeY/2, (sizeX-strlen(msg))/2);
+      
+      printw(msg);    
+
+      // Get the control char
       control(getch());
+
+      // Refresh screen
+      refresh();
     }
   endwin();
       
