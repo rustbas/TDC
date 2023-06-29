@@ -20,7 +20,6 @@ struct todo
   char str[];
 };
 
-todo 
 int main(void){
 
   initscr();
