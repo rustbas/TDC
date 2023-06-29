@@ -1,2 +1,2 @@
 all:
-	gcc -Wall -Wextra main.c -o main.out
+	gcc -Wall -Wextra -lncurses main.c -o main.out
