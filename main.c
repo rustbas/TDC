@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ncurses.h>
 
-bool quit = false;
+1bool quit = false;
 
 void control(char c)
 {
