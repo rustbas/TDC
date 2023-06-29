@@ -1,5 +1,10 @@
 # TDC
-Simple ToDo app with TUI
+Simple ToDo app with TUI.
 
 # TODO
-- [ ] Test new branch
+- [x] Test new branch
+- [ ] Create render functions
+  - [ ] Render one todo
+- [ ] Create todo-list control function
+  - [ ] Add element
+  - [ ] Remove element

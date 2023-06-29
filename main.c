@@ -21,8 +21,6 @@ struct todo
   char str[];
 };
 
-
-
 int main(void){
 
   initscr();
