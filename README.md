@@ -1,6 +1,14 @@
-# TDC
-Simple ToDo app with TUI
+# What is it?
+Simple ToDo app with TUI. 
+
+# Why is it?
+Why not
 
 # TODO
-- [x] Create `ncurses`-version of HelloWorld.
-- [ ] Create a branch for the simple version of TDC.
+- [x] Test new branch
+- [ ] Create render functions
+  - [ ] Render one todo
+- [ ] Create todo-list control function
+  - [ ] Rewrite whole ToDoList struct
+  - [ ] Add element
+  - [ ] Remove element
