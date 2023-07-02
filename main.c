@@ -12,7 +12,7 @@
 bool quit = false;
 int currLine = 0;
 
-void control(char c, char **tds)
+void control(char c, char *tds[][TODO_NAME_MAX_SIZE])
 {
   switch(c)
     {
@@ -36,14 +36,10 @@ void renderCurrLine(){
 
 int main(void){
 
-  char tds[4][TODO_NAME_MAX_SIZE] = {
-    "test1",
-    "test2",
-    "test3",
-    "test4",
-  };
-
-  char **tdsP = **tds;
+  char **tds;
+  tds = (char **) malloc(sizeof(char*) * 2);
+  tds[0] = "test1";
+  tds[1] = "test2";
   
   initscr();
   noecho();
@@ -94,7 +90,7 @@ int main(void){
       printw("currLine = %d", currLine + 1);
       
       // Get the control char
-      control(getch(), tdsP);
+      control(getch(), tds);
       
       // Refresh screen
       refresh();
