@@ -12,7 +12,7 @@
 bool quit = false;
 int currLine = 0;
 
-void control(char c)
+void control(char c, char **tds)
 {
   switch(c)
     {
@@ -20,7 +20,7 @@ void control(char c)
       quit = true;
       break;
     case 'j':
-      currLine = min(currLine + 1, SIZE_TODO_LIST - 1);
+      currLine = min(currLine + 1, (int) (sizeof(**tds)/sizeof(*tds[0])) - 1);
       break;
     case 'k':
       currLine = max(currLine - 1, 0);
@@ -36,10 +36,14 @@ void renderCurrLine(){
 
 int main(void){
 
-  char tds[2][TODO_NAME_MAX_SIZE] = {
+  char tds[4][TODO_NAME_MAX_SIZE] = {
     "test1",
     "test2",
+    "test3",
+    "test4",
   };
+
+  char **tdsP = **tds;
   
   initscr();
   noecho();
@@ -73,7 +77,9 @@ int main(void){
       //wbkgd(win, COLOR_PAIR(2));
       box(stdscr, 0,0);
 
-      for (int i = 0; i < SIZE_TODO_LIST;i++) {
+      int sizeTodoList = sizeof(tds)/sizeof(tds[0]);
+      
+      for (int i = 0; i < sizeTodoList; i++) {
 	move(i+1, 1);
 
 	if (currLine == i) {
@@ -84,11 +90,11 @@ int main(void){
 	
       }
 
-      move(SIZE_TODO_LIST+1, 1);
+      move(sizeTodoList+1, 1);
       printw("currLine = %d", currLine + 1);
       
       // Get the control char
-      control(getch());
+      control(getch(), tdsP);
       
       // Refresh screen
       refresh();
