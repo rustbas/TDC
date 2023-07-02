@@ -2,6 +2,9 @@
 #include <ncurses.h>
 #include <string.h>
 
+#define TODO_NAME_SIZE 100
+#define SIZE_TODO_LIST 2
+
 bool quit = false;
 
 void control(char c)
@@ -17,14 +20,11 @@ void control(char c)
 typedef struct
 {
   bool done;
-  char name[100];
+  char name[TODO_NAME_SIZE];
 } todo;
 
-
-#define sizeTodo 2
-
 int main(void){
-  todo tds[sizeTodo];
+  todo tds[SIZE_TODO_LIST];
 
   //tds.done = false;
   //tds.name = "test1";
@@ -50,7 +50,7 @@ int main(void){
       //move(sizeY/2, (sizeX-strlen(msg))/
       //printw(msg);    
 
-      for (int i = 0; i < sizeTodo;i++) {
+      for (int i = 0; i < SIZE_TODO_LIST;i++) {
 	move(i, 0);
 	printw(tds[i].name);
       }
