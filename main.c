@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define TODO_NAME_SIZE 100
+#define TODO_NAME_MAX_SIZE 100
 #define SIZE_TODO_LIST 2
 
 #define min(x,y) (((x) < (y)) ? (x) : (y))
@@ -28,21 +28,19 @@ void control(char c)
     }
 }
 
-typedef struct
-{
-  bool done;
-  char name[TODO_NAME_SIZE];
-} todo;
+void renderTodoList(){
+}
+
+void renderCurrLine(){
+}
 
 int main(void){
-  todo tds[SIZE_TODO_LIST];
 
-  //tds.done = false;
-  //tds.name = "test1";
-  tds[0].done = false;
-  strcpy(tds[0].name,"test1");
-  tds[1].done = false;
-  strcpy(tds[1].name,"test2");
+  char tds[2][TODO_NAME_MAX_SIZE] = {
+    "test1",
+    "test2",
+  };
+  
   initscr();
   noecho();
   curs_set(0);
@@ -65,24 +63,28 @@ int main(void){
     {
       // Get the size of the terminal
       getmaxyx(stdscr, sizeY, sizeX);
-      WINDOW *win = newwin(1, sizeX-3, currLine, 0);
+      //WINDOW *win = newwin(1, sizeX-3, currLine, 0);
       
       // Clean the screen
       erase();
 
       // Render stuff
-      //move(sizeY/2, (sizeX-strlen(msg))/
-      //printw(msg);    
-      bkgd(COLOR_PAIR(1));
-      wbkgd(win, COLOR_PAIR(2));
-      //box(win, 0,0);
+      //bkgd(COLOR_PAIR(1));
+      //wbkgd(win, COLOR_PAIR(2));
+      box(stdscr, 0,0);
 
       for (int i = 0; i < SIZE_TODO_LIST;i++) {
-	move(i, 0);
-	printw("- [%d]: %s", i+1, tds[i].name); // Rewrite using WINDOW
+	move(i+1, 1);
+
+	if (currLine == i) {
+	  printw("-->[%d]: %s", i+1, tds[i]);
+	} else {
+	  printw(" - [%d]: %s", i+1, tds[i]); // Rewrite using WINDOW
+	};
+	
       }
 
-      move(SIZE_TODO_LIST, 0);
+      move(SIZE_TODO_LIST+1, 1);
       printw("currLine = %d", currLine + 1);
       
       // Get the control char
@@ -90,7 +92,6 @@ int main(void){
       
       // Refresh screen
       refresh();
-      wrefresh(win);
     }
   endwin();
       
